@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style type="text/css" media="screen" class="vscode-tokens-styles">
+      .mtk1 {
+        color: #c9d1d9 !important;
+      }
+
+      .mtk2 {
+        color: #0d1117 !important;
+      }
+
+      .mtk3 {
+        color: #8b949e !important;
+      }
+
+      .mtk4 {
+        color: #79c0ff !important;
+      }
+
+      .mtk5 {
+        color: #ffa657 !important;
+      }
+
+      .mtk6 {
+        color: #d2a8ff !important;
+      }
+
+      .mtk7 {
+        color: #7ee787 !important;
+      }
+
+      .mtk8 {
+        color: #ff7b72 !important;
+      }
+
+      .mtk9 {
+        color: #a5d6ff !important;
+      }
+
+      .mtk10 {
+        color: #ffa198 !important;
+      }
+
+      .mtk11 {
+        color: #f0f6fc !important;
+      }
+
+      .mtk12 {
+        color: #490202 !important;
+      }
+
+      .mtk13 {
+        color: #04260f !important;
+      }
+
+      .mtk14 {
+        color: #5a1e02 !important;
+      }
+
+      .mtk15 {
+        color: #161b22 !important;
+      }
+
+      .mtk16 {
+        color: #6796e6 !important;
+      }
+
+      .mtk17 {
+        color: #cd9731 !important;
+      }
+
+      .mtk18 {
+        color: #f44747 !important;
+      }
+
+      .mtk19 {
+        color: #b267e6 !important;
+      }
+
+      .mtki {
+        font-style: italic !important;
+      }
+
+      .mtkb {
+        font-weight: bold !important;
+      }
+
+      .mtku {
+        text-decoration: underline !important;
+        text-underline-position: under !important;
+      }
+
+      .mtks {
+        text-decoration: line-through !important;
+      }
+
+      .mtks.mtku {
+        text-decoration: underline line-through !important;
+        text-underline-position: under !important;
+      }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Studio</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://stackedit.io/style.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="input.css" />
+    <link rel="stylesheet" href="monaco.css" />
+    <script src="https://unpkg.com/magic-portal"></script>
+    <script src="https://unpkg.com/monaco-editor@0.8.3/min/vs/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackedit.io/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+      integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="icon"
+      href="https://raw.githubusercontent.com/Launchstudio/Launchstudio.github.io/main/waffle.jpg"
+      sizes="16x16"
+    />
+  </head>
+
+  <body>
+    <div id="info"></div>
+    <i
+      class="material-icons mdc-button__icon markdown-converter-button"
+      aria-hidden="true"
+      title="menu"
+      onclick="convertToMarkdown()"
+      id="markdown-converter"
+    >
+      visibility
+    </i>
+    <i
+      class="material-icons mdc-button__icon html-preview-button"
+      aria-hidden="true"
+      title="menu"
+      onclick="htmlpreview()"
+      id="html-converter"
+    >
+      visibility
+    </i>
+    <i
+      class="material-icons mdc-button__icon html-preview-button"
+      aria-hidden="true"
+      title="menu"
+      onclick="run()"
+      id="run-converter"
+    >
+      play_arrow
+    </i>
+    <progress class="pure-material-progress-linear loaders"></progress>
+    <div class="bug-create-container" id="settings">
+      <h2>Settings</h2>
+      <label class="pure-material-textfield-outlined">
+        <input placeholder=" " />
+        <span>Font Size</span>
+      </label>
+      <br />
+      <label class="pure-material-textfield-outlined">
+        <input placeholder=" " />
+        <span>Command Line arguments</span>
+      </label>
+      <br />
+      <label class="pure-material-textfield-outlined">
+        <input placeholder=" " />
+        <span>Compiler Options</span>
+      </label>
+
+      <!-- <label class="pure-material-checkbox">
+        <input type="checkbox" />
+        <span>High Contrast</span>
+      </label> -->
+
+      <button id="create-bug">Change</button>
+    </div>
+    <div class="snippet" id="progress" data-title=".dot-falling">
+      <div class="stage">
+        <div class="dot-falling"></div>
+      </div>
+    </div>
+
+    <div id="output"></div>
+
+    <div id="bug-tree">
+      <section style="display: flex; justify-content: flex-end;">
+        <button id="dashboard" onclick="bugs()">Add bug</button>
+      </section>
+    </div>
+    <div id="tree"></div>
+
+    <header>
+      <div id="logocontainer">
+        <i class="fas fa-vector-square"></i>
+        <div>
+          <p id="name"></p>
+          <a id="url"></a>
+        </div>
+      </div>
+
+      <div id="buttoncontainer">
+        <button onclick="cloud()" id="dashboard">
+          <i class="fas fa-code-branch"></i> Commit
+        </button>
+
+        <img id="user-img" />
+      </div>
+    </header>
+
+    <main>
+        <div class="package-readme" id="package-readme-container">
+            <header> <i class="material-icons mdc-button__icon" aria-hidden="true" title="menu" onclick="close_package_readme()">
+                      close
+                    </i></header>
+                    <div id="package-readme"></div>
+            
+        </div>
+      <div class="package-container" id="package-container">
+        <div class="search-container">
+          <div class="micro-search-cont">
+              <input class="package-search" id="package-search" oninput="find_package()"></input>
+              <i
+              class="material-icons mdc-button__icon"
+              aria-hidden="true"
+              title="menu"
+              onclick="find_package()"
+            >
+              search
+            </i>
+          </div>
+        </div>
+        <div class="packages" id="packages"></div>
+      </div>
+      <div
+        id="markdown-container"
+        class="markdown-render markdown-container stackedit"
+      >
+        <div id="markdown" class="stackedit__html"></div>
+      </div>
+      <iframe id="html-container"></iframe>
+      <div class="commit" id="commithash"></div>
+      <div id="icon-container">
+        <i
+          class="material-icons mdc-button__icon run-icon"
+          aria-hidden="true"
+          title="menu"
+          onclick="files()"
+          id="run"
+          style="margin-top: 8px;"
+        >
+          source </i
+        ><i
+          class="material-icons mdc-button__icon"
+          aria-hidden="true"
+          title="menu"
+          onclick="settings()"
+        >
+          settings </i
+        ><i
+          class="material-icons mdc-button__icon"
+          aria-hidden="true"
+          title="menu"
+          onclick="open_bug_pane()"
+        >
+          bug_report </i
+        ><i
+          class="material-icons mdc-button__icon"
+          aria-hidden="true"
+          title="menu"
+          onclick="help()"
+        >
+          help_center
+        </i>
+        <i
+          class="material-icons mdc-button__icon"
+          aria-hidden="true"
+          title="menu"
+          onclick="open_commit_pane()"
+        >
+          commit
+        </i>
+
+        <i
+          class="material-icons mdc-button__icon"
+          aria-hidden="true"
+          title="menu"
+          onclick="find()"
+        >
+          search
+        </i>
+        <i
+          class="material-icons mdc-button__icon"
+          aria-hidden="true"
+          title="menu"
+          onclick="packages()"
+        >
+          inventory_2
+        </i>
+      </div>
+      <div id="maintainer">
+        <div id="editor"></div>
+        <div class="footer">
+          <i
+            class="material-icons mdc-button__icon"
+            aria-hidden="true"
+            title="menu"
+          >
+            keyboard
+          </i>
+          <a>Privacy</a>
+          <a>Send feedback</a>
+          <p id="commit-id"></p>
+        </div>
+      </div>
+      <!-- <div class="result-container">
+        <div class="result-header">
+          <button onclick="runInput()">
+            <i class="fas fa-play"></i>Run with input
+          </button>
+        </div>
+        <div id="output"></div>
+      </div> -->
+
+      <div class="languages">
+        <header>
+          <i class="fas fa-vector-square"></i>
+          <div>
+            <button onclick="add()">New Repository</button>
+          </div>
+        </header>
+
+        <div class="title">
+          <p>Repositories</p>
+        </div>
+        <div id="languages"></div>
+      </div>
+    </main>
+
+    <script
+      src="//ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+
+    <script src="languageDefaultFile.js"></script>
+    <script src="script.js"></script>
+    <script src="hex.js"></script>
+    <script src="firebase.js"></script>
+    <script src="sandbox.js"></script>
+    <script src="issue.js"></script>
+    <script src="listen.js"></script>
+    <script src="git.js"></script>
+    <script src="package.js"></script>
+    <script src="compiler.js"></script>
+    <script src="treeview.js"></script>
+  </body>
+</html>
